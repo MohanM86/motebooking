@@ -1,0 +1,36 @@
+# møtebooking.io robots.txt
+# https://møtebooking.io/robots.txt
+
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+Disallow: /dashboard/
+
+# Sitemaps
+Sitemap: https://møtebooking.io/sitemap.xml
+
+# Crawl-delay (be polite)
+Crawl-delay: 1
+
+# AI Crawlers - Welcome
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Bytespider
+Allow: /

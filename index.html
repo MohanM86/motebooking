@@ -191,16 +191,41 @@
         .mob-btn {
             display: none; background: none; border: none;
             cursor: pointer; padding: 6px; position: relative;
-            width: 36px; height: 36px;
+            width: 36px; height: 36px; z-index: 210;
         }
         .mob-btn span {
             position: absolute; left: 8px;
             width: 20px; height: 1.5px; background: var(--ink);
-            transition: all 0.3s;
+            transition: all 0.3s var(--ease);
         }
         .mob-btn span:nth-child(1) { top: 12px; }
         .mob-btn span:nth-child(2) { top: 17px; }
         .mob-btn span:nth-child(3) { top: 22px; }
+        .mob-btn.active span:nth-child(1) { top: 17px; transform: rotate(45deg); }
+        .mob-btn.active span:nth-child(2) { opacity: 0; }
+        .mob-btn.active span:nth-child(3) { top: 17px; transform: rotate(-45deg); }
+
+        /* MOBILE MENU OVERLAY */
+        .mob-menu {
+            display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(255,255,255,0.97); backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            z-index: 199; padding: 100px 32px 40px;
+            flex-direction: column; align-items: center; justify-content: center; gap: 8px;
+            opacity: 0; transition: opacity 0.3s var(--ease);
+        }
+        .mob-menu.open { display: flex; opacity: 1; }
+        .mob-menu a {
+            display: block; padding: 16px 0; font-size: 20px; font-weight: 600;
+            color: var(--ink); text-decoration: none; letter-spacing: -0.02em;
+            text-align: center; transition: color 0.2s;
+        }
+        .mob-menu a:hover { color: var(--g500); }
+        .mob-menu .mob-cta {
+            margin-top: 16px; display: inline-flex; align-items: center; gap: 8px;
+            padding: 16px 36px; background: var(--ink); color: var(--white);
+            border-radius: 100px; font-size: 16px; font-weight: 700;
+        }
 
         /* ═══ HERO ═══ */
         .hero {
@@ -725,9 +750,20 @@
             <li><a href="https://aibooking.no">AI Booking ↗</a></li>
         </ul>
         <div class="nav-cta-wrap"><a href="#start" class="nav-cta">Kom i gang</a></div>
-        <button class="mob-btn" aria-label="Meny"><span></span><span></span><span></span></button>
+        <button class="mob-btn" id="mobBtn" aria-label="Meny"><span></span><span></span><span></span></button>
     </div></div>
 </nav>
+
+<!-- MOBILE MENU -->
+<div class="mob-menu" id="mobMenu">
+    <a href="#funksjoner" class="mob-link">Funksjoner</a>
+    <a href="#hvordan" class="mob-link">Prosess</a>
+    <a href="#kalkulator" class="mob-link">ROI-kalkulator</a>
+    <a href="#priser" class="mob-link">Priser</a>
+    <a href="#faq" class="mob-link">FAQ</a>
+    <a href="https://aibooking.no" class="mob-link">AI Booking ↗</a>
+    <a href="#start" class="mob-cta mob-link">Kom i gang</a>
+</div>
 
 <!-- ═══════ HERO ═══════ -->
 <header class="hero" id="hjem">
@@ -1188,6 +1224,20 @@ document.querySelectorAll('.fq-btn').forEach(b => b.addEventListener('click', ()
     const fq = b.parentElement, open = fq.classList.contains('open');
     document.querySelectorAll('.fq.open').forEach(f => f.classList.remove('open'));
     if (!open) fq.classList.add('open');
+}));
+
+// ═══ MOBILE MENU ═══
+const mobBtn = document.getElementById('mobBtn');
+const mobMenu = document.getElementById('mobMenu');
+mobBtn.addEventListener('click', () => {
+    mobBtn.classList.toggle('active');
+    mobMenu.classList.toggle('open');
+    document.body.style.overflow = mobMenu.classList.contains('open') ? 'hidden' : '';
+});
+document.querySelectorAll('.mob-link').forEach(a => a.addEventListener('click', () => {
+    mobBtn.classList.remove('active');
+    mobMenu.classList.remove('open');
+    document.body.style.overflow = '';
 }));
 
 // ═══ SMOOTH SCROLL ═══

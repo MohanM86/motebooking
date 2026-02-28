@@ -274,22 +274,47 @@
         .feed-time { font-family: var(--mono); font-size: 11px; color: var(--g400); flex-shrink: 0; }
         .feed-divider { height: 1px; background: var(--border); margin: 0 16px; }
 
-        /* ═══ PROOF ═══ */
+        /* ═══ PROOF TICKER ═══ */
         .proof {
-            padding: 40px 0;
+            padding: 0;
             border-top: 1px solid var(--border);
             border-bottom: 1px solid var(--border);
+            overflow: hidden;
+            background: var(--g50);
         }
-        .proof-inner {
-            display: flex; align-items: center; justify-content: center;
-            gap: clamp(32px,5vw,64px); flex-wrap: wrap;
+        .proof-track { overflow: hidden; position: relative; }
+        .proof-track::before,
+        .proof-track::after {
+            content: ''; position: absolute; top: 0; bottom: 0; width: 80px; z-index: 2; pointer-events: none;
         }
-        .proof-item {
-            font-weight: 800; font-size: 15px; color: var(--g300);
-            letter-spacing: -0.04em; transition: color 0.3s;
-            text-transform: uppercase; user-select: none;
+        .proof-track::before { left: 0; background: linear-gradient(90deg, var(--g50), transparent); }
+        .proof-track::after { right: 0; background: linear-gradient(270deg, var(--g50), transparent); }
+        .proof-scroll {
+            display: flex; align-items: center;
+            animation: ticker 30s linear infinite;
+            width: max-content;
         }
-        .proof-item:hover { color: var(--g500); }
+        @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+        .proof-stat {
+            display: flex; align-items: center; gap: 10px;
+            padding: 22px 0;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+        .proof-num {
+            font-family: var(--mono); font-weight: 500;
+            font-size: 15px; color: var(--ink);
+            letter-spacing: -0.02em;
+        }
+        .proof-label {
+            font-size: 13px; color: var(--g400);
+            font-weight: 500;
+        }
+        .proof-sep {
+            width: 4px; height: 4px; border-radius: 50%;
+            background: var(--g300); margin: 0 28px;
+            flex-shrink: 0;
+        }
 
         /* ═══ SECTION SYSTEM ═══ */
         .sec-label {
@@ -721,15 +746,36 @@
     </div></div>
 </header>
 
-<!-- ═══════ PROOF ═══════ -->
+<!-- ═══════ PROOF TICKER ═══════ -->
 <div class="proof">
-    <div class="container"><div class="proof-inner">
-        <span class="proof-item">VISMA</span>
-        <span class="proof-item">KAHOOT!</span>
-        <span class="proof-item">ATEA</span>
-        <span class="proof-item">CRAYON</span>
-        <span class="proof-item">ITERA</span>
-    </div></div>
+    <div class="proof-track">
+        <div class="proof-scroll">
+            <div class="proof-stat"><span class="proof-num">200+</span><span class="proof-label">Norske bedrifter</span></div>
+            <div class="proof-sep"></div>
+            <div class="proof-stat"><span class="proof-num">47 000+</span><span class="proof-label">Møter booket</span></div>
+            <div class="proof-sep"></div>
+            <div class="proof-stat"><span class="proof-num">340%</span><span class="proof-label">Snitt pipeline-økning</span></div>
+            <div class="proof-sep"></div>
+            <div class="proof-stat"><span class="proof-num">98%</span><span class="proof-label">Kundetilfredshet</span></div>
+            <div class="proof-sep"></div>
+            <div class="proof-stat"><span class="proof-num">4.9/5</span><span class="proof-label">Gjennomsnittlig rating</span></div>
+            <div class="proof-sep"></div>
+            <div class="proof-stat"><span class="proof-num">&lt;14 dager</span><span class="proof-label">Tid til første møte</span></div>
+            <div class="proof-sep"></div>
+            <div class="proof-stat"><span class="proof-num">200+</span><span class="proof-label">Norske bedrifter</span></div>
+            <div class="proof-sep"></div>
+            <div class="proof-stat"><span class="proof-num">47 000+</span><span class="proof-label">Møter booket</span></div>
+            <div class="proof-sep"></div>
+            <div class="proof-stat"><span class="proof-num">340%</span><span class="proof-label">Snitt pipeline-økning</span></div>
+            <div class="proof-sep"></div>
+            <div class="proof-stat"><span class="proof-num">98%</span><span class="proof-label">Kundetilfredshet</span></div>
+            <div class="proof-sep"></div>
+            <div class="proof-stat"><span class="proof-num">4.9/5</span><span class="proof-label">Gjennomsnittlig rating</span></div>
+            <div class="proof-sep"></div>
+            <div class="proof-stat"><span class="proof-num">&lt;14 dager</span><span class="proof-label">Tid til første møte</span></div>
+            <div class="proof-sep"></div>
+        </div>
+    </div>
 </div>
 
 <!-- ═══════ FEATURES BENTO ═══════ -->
